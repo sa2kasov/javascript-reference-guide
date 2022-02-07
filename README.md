@@ -36,6 +36,7 @@
    4. [for](#for)
    5. [while](#while)
    6. [do..while](#dowhile)
+   7. [for..in](#forin)
 
 
 ## История появления
@@ -574,18 +575,29 @@ while (num < 1000) {
 let num = 1
 
 do {
-  num *= 2
-  if (num == 32) continue
-  else if (num == 512) break
-  console.log(num)
-} while(num < 1000)
+   num *= 2
+   if (num == 32) continue
+   else if (num == 512) break
+   console.log(num)
+} while (num < 1000)
 ```
 
 Если в теле цикла `do..while` все лишь одна инструкция, то операторные скобки можно опустить.
 
 ```js
-let a = 0;
-do a++; while(a <= 5) // Одна инструкция в теле цикла
+let a = 0
+do a++
+while (a <= 5) // Одна инструкция в теле цикла
 console.log(a) // -> 5
+```
+
+### for..in
+
+Предназначен для прохода по массивам, коллекциям, объектам.
+
+```js
+for (let prop in navigator) {
+  console.log(prop)
+}
 ```
 
