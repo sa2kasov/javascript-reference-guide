@@ -37,6 +37,7 @@
    5. [while](#while)
    6. [do..while](#dowhile)
    7. [for..in](#forin)
+   8. [Метки](#Метки)
 
 
 ## История появления
@@ -599,5 +600,25 @@ console.log(a) // -> 5
 for (let prop in navigator) {
   console.log(prop)
 }
+```
+
+### Метки
+
+Иногда бывает нужно прервать вложенный цикл или цикл с n-количеством вложенности. В JavaScript это можно организовать с помощью меток. Названия меток не должны начинаться с цифры.
+
+```js
+let i = 1
+
+outer: while (i < 10) {
+ inner: for (var j = 1; j <= i; j++) {
+   if (j > 2)
+    continue inner
+   if (i * j > 10) {
+     console.log(i, j)
+     break outer
+   }
+ }
+ i++
+} // -> 6, 2
 ```
 
