@@ -44,6 +44,7 @@
    2. [Функция как тип данных](#Функция-как-тип-данных)
    3. [Свойства функций](#Свойства-функций)
    4. [Анонимная функция](#Анонимная-функция)
+   5. [Замыкания](#Замыкания)
 
 
 ## История появления
@@ -843,5 +844,38 @@ const bar = function(args) {
 function foo(parameters) {
   statements
 }
+```
+
+### Замыкания
+
+_Замыкания_ – способность функции захватывать переменные родительского контекста.
+
+```js
+function makeAdd(base) {
+  return function(num) {
+    return num + base;
+  }
+}
+
+const addTen = makeAdd(5)
+addTen(10) // -> 15
+```
+
+**Пример со сравнением чисел**
+
+При первом вызове `compare(10)` функция возвратит внутреннюю функцию при этом сохранив в переменной `x` значение `10`.
+
+```js
+function compare(x) {
+   return function innerCompare(y) {
+      if (x === y) return null
+      return x < y
+   }
+}
+
+const checkNum = compare(10) // -> function "innerCompare"
+checkNum(9) // -> false
+checkNum(10) // -> null
+checkNum(11) // -> true
 ```
 
