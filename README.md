@@ -51,6 +51,7 @@
     2. [Свойства объекта](#Свойства-объекта)
     3. [Перебор свойств объекта](#Перебор-свойств-объекта)
     4. [Сравнение объектов](#Сравнение-объектов)
+    5. [Создание методов в объекте](#Создание-методов-в-объекте)
 
 
 ## История появления
@@ -1025,5 +1026,38 @@ console.log(o1 == o3) // -> false
 o2.x = 200
 // Значение свойства "x" объекта "o1" также изменилось
 console.log(o1.x)
+```
+
+### Создание методов в объекте
+
+Методы создаются путем присваивания анонимной функции.
+
+```js
+const Methods = {
+  one: function() {
+    console.log('This is method "one"')
+  },
+  two: function(param) {
+    console.log('I am a ' + param)
+  }
+}
+
+methods.one() // -> This is method "one"
+methods.two('JavaScript Student') // -> I am a JavaScript Student
+```
+
+**Ключевое слово `this`?**
+
+Ключевое слово `this` используется в объектах для передачи ссылки на объект внутри которого он вызывается. Вместо `this` сработало бы и имя объекта, но принято использовать именно `this`.
+
+```js
+const MyObject = {
+  property: 'property value',
+  method: function() {
+    console.log(this.property)
+  },
+}
+
+MyObject.method() // -> "property value"
 ```
 
