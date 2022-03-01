@@ -52,6 +52,7 @@
     3. [Перебор свойств объекта](#Перебор-свойств-объекта)
     4. [Сравнение объектов](#Сравнение-объектов)
     5. [Создание методов в объекте](#Создание-методов-в-объекте)
+    6. [Методы объекта Object](#Методы-объекта-Object)
 
 
 ## История появления
@@ -1059,5 +1060,32 @@ const MyObject = {
 }
 
 MyObject.method() // -> "property value"
+```
+
+### Методы объекта Object
+
+* `valueOf()` – возвращает примитивное значение объектов Number, Boolean, ...;
+* `имяОбъекта.hasOwnProperty(имяСвойства)` – является ли свойство/метод унаследованным;
+* `имяОбъекта.propertyIsEnumerable(имяСвойства)` – является ли свойство перечисляемым;
+* `Object.prototype.isPrototypeOf(объект)` – является ли прототип прототипом объекта.
+
+```js
+// valueOf
+var n = new Number(5)
+n.valueOf() // -> 5
+
+// hasOwnProperty
+Object.prototype.myProperty = 'myValue'
+const player = {
+  id: 1123467,
+  pass: '******',
+}
+
+// Напечатает только собственные свойства и методы
+for (var i in player) {
+  if (player.hasOwnProperty(i)) {
+    console.log(player[i])
+  }
+}
 ```
 
