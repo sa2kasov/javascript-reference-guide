@@ -95,6 +95,8 @@
        7. [Примеры использования](#Примеры-RegEx)
     7. [Error](#Error)
        1. [Инициирование исключения](#Инициирование-исключения)
+14. [Объектно-ориентированное программирование](#Объектно-ориентированное-программирование)
+  1. [Создание функции-конструктора](#Создание-функции-конструктора)
 
 
 ## История появления
@@ -2069,4 +2071,60 @@ try {
   console.error(e.message) // -> Access denied
 }
 ```
+
+## Объектно-ориентированное программирование
+
+Все типы данных в JavaScript, кроме тривиальных типов (`null`, `undefined`) имеют собственные классы-конструкторы.
+
+_Конструктор_ – функция с помощью которой можно создавать какие-либо объекты. Имя таких функций принято именовать с Большой буквы.
+
+### Создание функции-конструктора
+
+```js
+function User(name) {
+  this.name = name
+  this.age = null
+  this.say = function(word) {
+    if (typeof word == 'string') {
+      console.info('Hello, ' + word + ' from ' + this.name)
+    }
+    return false
+  }
+}
+
+// Иницилизация объектов от конструктора "User"
+const user1 = new User('John')
+user1.age = 30
+const user2 = new User('Jane')
+
+user1.say('Alice') // -> 'Hello, Alice from John'
+user2.say('Bob') // -> 'Hello, Bob from Jane'
+```
+
+Свойство _constructor_ позволяет узнать какой конструктор был использован при создании какой-либо переменной.
+
+* `ИмяОбъекта.constructor` – возвращает конструктор объекта, т.е. функцию-конструктор от которой был создан объект;
+* `instanceof` – проверка принадлежности объекта к конкретному типу.
+
+```js
+const x = 5
+x.constructor; // -> function Number(){[native code]}
+user1.constructor /* -> function User(name){
+  this.name = name
+  this.age = null
+  this.say = function(word) {
+    if (typeof word == 'string') {
+      console.log('Hello, ' + word + ' from ' + this.name)
+    }
+    return false
+  }*/
+
+// Оператор instanceof
+x instanceof Number // -> false, хотя x = 5
+x = new Number(5)
+x instanceof Number // -> true
+x instanceof Object // -> true
+```
+
+В последнем примере `x instanceof Object` равен `true`, т.к. `Number` наследует `Object`, а оператор `instanceof` проверяет принадлежность к объекту по цепочке.
 
