@@ -116,6 +116,7 @@
        2. [Element](#Element)
        3. [HTMLElement](#HTMLElement)
        4. [Document](#Document)
+       5. [Примеры свойств и методов](#Примеры-свойств-и-методов-узлов-DOM)
 
 
 ## История появления
@@ -2614,4 +2615,90 @@ _DOM (Document Object Model)_ – это иерархическая структ
 |         `removeChild(node)`         | удаляет узел из списка дочерних элементов указанного родительского элемента        |
 
 Полный список свойств и методов Document в [документации](https://developer.mozilla.org/en-US/docs/Web/API/Document).
+
+#### Примеры свойств и методов узлов DOM
+
+Создание элемента и текстовых узлов
+
+```js
+// Создание нового элемента <p>
+const p = document.createElement('p')
+// Создание текстового узла
+const txt = document.createTextNode('Это новый параграф в конце')
+// Вставка в элемент
+p.appendChild(txt)
+// Вставить в конец элемента body
+document.body.appendChild(e)
+```
+
+Способ с `insertBefore()`
+
+```js
+const p = document.createElement('p')
+p.appendChild(document.createTextNode('Это новый параграф вначале'))
+// Второй аргумент – перед каким элементом
+document.body.insertBefore(e, document.body.firstChild)
+```
+
+Создание фрагмента
+
+```js
+const p = document.createElement('p')
+p.textContent = '... fragment text ...'
+
+// Создание фрагмента
+const fragment = document.createDocumentFragment()
+// Вставка в фрагмент
+fragment.appendChild(p)
+// Вставка клонированного фрагмента в <div>
+const div = document.getElementById('div')
+// Параметр true скопирует элемент с содержимым
+div.appendChild(fragment.cloneNode(true))
+```
+
+Удаление элементов
+
+```js
+// Последний дочерний элемент в секции body
+const lastElement = document.body.lastChild
+// Фильтруем текстовые узлы
+while (lastElement.nodeType == 3)
+  // Присвоение предыдущего соседнего узла
+  lastElement = lastElement.previousSibling
+
+// Если в body есть дочерние узлы
+if (document.body.hasChildNodes())
+  // Удаляем последний дочерний элемент
+  document.body.removeChild(lastElement)
+```
+
+Модифицирование элемента
+
+```js
+// Первыый попавшийся элемент h1
+const e = document.getElementsByTagName('h1')[0]
+// Изменение стилей
+e.style.font = '28px Impact, Tahoma, Segoe, monospace'
+e.style.color = '#45D'
+e.style.textShadow = '#A2C 0 0 5px'
+e.innerHTML = '<em>innerText</em>' // Вставит как код HTML
+e.childNodes[0].nodeValue = '<em>innerText</em>' // Вставит как текст
+```
+
+Манипуляция атрибутами элемента
+
+```js
+// Формируем массив абзацев
+const paragraphes = document.getElementsByTagName('p')
+
+// Смена атрибута align на противоположный
+for (let i in paragraphes) {
+  if (paragraphes[i].getAttribute('align') == 'right')
+    paragraphes[i].setAttribute('align', 'left')
+  else if (paragraphes[i].getAttribute('align') == 'left')
+    paragraphes[i].setAttribute('align', 'right')
+  else
+    paragraphes[i].removeAttribute('align') // Пример удаления
+}
+```
 
